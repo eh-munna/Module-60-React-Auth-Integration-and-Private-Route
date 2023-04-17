@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../providers/AuthProvider/AuthProvider';
 
 const Header = () => {
+  const { user, userSignOut } = useContext(AuthContext);
+  console.log(user);
+
+  const hangleLogout = () => {
+    userSignOut()
+      .then(() => {})
+      .catch(() => {});
+  };
   return (
     <nav>
       <div className="navbar bg-base-300 gap-6">
@@ -9,6 +18,18 @@ const Header = () => {
         <Link to="/">Home</Link>
         <Link to="/login">Login</Link>
         <Link to="/register">Register</Link>
+        <Link to="/">
+          {user ? (
+            <>
+              <span className="mr-3">{user.email}</span>{' '}
+              <span>
+                <button onClick={hangleLogout}>Sign Out</button>
+              </span>
+            </>
+          ) : (
+            <Link to="/login">Sign In</Link>
+          )}
+        </Link>
       </div>
     </nav>
   );
