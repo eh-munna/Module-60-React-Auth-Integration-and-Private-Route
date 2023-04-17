@@ -16,18 +16,20 @@ const Header = () => {
       <div className="navbar bg-base-300 gap-6">
         <a className="btn btn-ghost normal-case text-xl">Logo</a>
         <Link to="/">Home</Link>
-        <Link to="/login">Login</Link>
+        {/* <Link to="/login">Login</Link> */}
         <Link to="/register">Register</Link>
+        <Link to="/orders">Orders</Link>
+        {user && <Link to="/profile">Profile</Link>}
         <Link to="/">
           {user ? (
             <>
               <span className="mr-3">{user.email}</span>{' '}
               <span>
-                <button onClick={hangleLogout}>Sign Out</button>
+                <button onClick={hangleLogout}>Logout</button>
               </span>
             </>
           ) : (
-            <Link to="/login">Sign In</Link>
+            <Link to="/login">Login</Link>
           )}
         </Link>
       </div>
